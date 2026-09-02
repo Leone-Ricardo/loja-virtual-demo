@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Catálogo digital exclusivo. Escolha suas peças e faça o pedido direto no WhatsApp.">
+    <title>Boutique Elegance | Catálogo VIP</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ================= Variaveis e Reset ================= */
+        :root {
+            --cor-fundo: #FAFAFA;
+            --cor-texto: #1A1A1A;
+            --cor-texto-mutado: #666666;
+            --cor-primaria: #000000;
+            --cor-secundaria: #FFFFFF;
+            --cor-destaque: #D4AF37; 
+            --cor-whatsapp: #25D366;
+            --cor-borda: #EAEAEA;
+            --cor-footer: #111111;
+            --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --raio-borda: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--cor-fundo); color: var(--cor-texto); padding-bottom: 90px; }
+
+        /* ================= Topbar de Benefícios (DESKTOP) ================= */
+        .topbar-beneficios {
+            display: none; 
+            background-color: var(--cor-destaque);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 8px 10px;
+            justify-content: center;
+            gap: 30px;
+        }
+        .beneficio-item { display: flex; align-items: center; gap: 8px; }
+
+        /* ================= Header e Menu Toggle ================= */
+        header {
+            position: sticky; 
+            top: 0; 
+            z-index: 50;
+            background-color: var(--cor-secundaria);
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .header-main {
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--cor-secundaria);
+            position: relative;
+            z-index: 51; 
+        }
+
+        .logo { font-size: 1.25rem; font-weight: 700; text-transform: uppercase; }
+        .logo span { color: var(--cor-destaque); }
+
+        .menu-toggle {
+            background: none; border: none; font-size: 1.5rem;
+            color: var(--cor-primaria); cursor: pointer;
+            display: flex; align-items: center;
+        }
+
+        /* ================= Menu Dropdown Mobile ================= */
+        .categorias-menu {
+            position: absolute; top: 100%; left: 0; width: 100%;
+            background: var(--cor-secundaria); display: flex; flex-direction: column;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1); z-index: 50;
+            opacity: 0; visibility: hidden; transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .categorias-menu.aberto { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .beneficios-mobile {
+            background-color: var(--cor-destaque); color: #fff;
+            padding: 15px 20px; display: flex; flex-direction: column; gap: 12px;
+        }
+        .beneficios-mobile .beneficio-item { font-size: 0.85rem; font-weight: 600; }
+
+        .categoria-btn {
+            padding: 15px 20px; text-decoration: none; font-size: 0.95rem;
+            font-weight: 600; color: var(--cor-texto-mutado);
+            border-bottom: 1px solid var(--cor-borda); transition: 0.2s;
+        }
+        .categoria-btn.ativo { color: var(--cor-primaria); background: var(--cor-fundo); border-left: 4px solid var(--cor-destaque); }
+
+        /* ================= Estrutura Principal e Grid ================= */
+        .container { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        .sessao-catalogo { margin-bottom: 40px; scroll-margin-top: 80px; }
+        .section-titulo { font-size: 1.35rem; font-weight: 700; margin-bottom: 15px; color: var(--cor-primaria); display: flex; align-items: center; gap: 10px; }
+        .section-titulo::after { content: ""; flex-grow: 1; height: 1px; background: var(--cor-borda); }
+        
+        .produtos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .produto-card { background: var(--cor-secundaria); border-radius: var(--raio-borda); overflow: hidden; box-shadow: var(--sombra-card); display: flex; flex-direction: column; position: relative; }
+        
+        .badge-novo { position: absolute; top: 10px; left: 10px; background: var(--cor-destaque); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; }
+        .produto-img-container { position: relative; padding-top: 130%; overflow: hidden; background: #eee; }
+        .produto-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+        
+        .produto-info { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .produto-titulo { font-size: 0.9rem; color: var(--cor-texto-mutado); font-weight: 400; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .produto-preco { font-size: 1.1rem; font-weight: 700; color: var(--cor-primaria); margin-bottom: 10px; }
+        .btn-add { background-color: var(--cor-primaria); color: var(--cor-secundaria); border: none; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; width: 100%; }
+
+        /* ================= Footer ================= */
+        footer { background-color: var(--cor-footer); color: #fff; padding: 40px 20px 20px; margin-top: 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h3 { color: var(--cor-destaque); font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { color: #cccccc; margin-bottom: 10px; line-height: 1.5; }
+        .footer-col ul { list-style: none; }
+        .footer-col a { color: #cccccc; text-decoration: none; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--cor-destaque); }
+        .redes-sociais { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icon { width: 35px; height: 35px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; font-size: 1.2rem; }
+        .footer-bottom { text-align: center; border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; color: #888; font-size: 0.8rem; padding-bottom: 20px; }
+
+        /* ================= Carrinho e Modais ================= */
+        .cart-flutuante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: var(--cor-primaria); color: var(--cor-secundaria); padding: 14px 24px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: space-between; width: 90%; max-width: 400px; font-weight: 600; cursor: pointer; z-index: 90; transition: transform 0.3s, opacity 0.3s; }
+        .cart-flutuante.hidden { transform: translate(-50%, 100px); opacity: 0; pointer-events: none; }
+        .cart-badge { background: var(--cor-secundaria); color: var(--cor-primaria); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 100; display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        .modal-overlay.ativo { opacity: 1; pointer-events: all; }
+        .modal-content { background: var(--cor-secundaria); width: 100%; max-width: 500px; border-radius: 20px 20px 0 0; padding: 20px; transform: translateY(100%); transition: transform 0.3s ease; max-height: 85vh; display: flex; flex-direction: column; }
+        .modal-overlay.ativo .modal-content { transform: translateY(0); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--cor-borda); padding-bottom: 10px; }
+        .fechar-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .itens-carrinho { overflow-y: auto; flex-grow: 1; margin-bottom: 20px; }
+        .item-carrinho { display: flex; justify-content: space-between; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--cor-fundo); }
+        .item-detalhes { display: flex; flex-direction: column; width: 70%; }
+        .item-nome { font-size: 0.9rem; font-weight: 600; }
+        .item-preco { color: var(--cor-texto-mutado); font-size: 0.85rem; }
+        .btn-remover { color: #ff4757; background: none; border: none; font-size: 0.8rem; cursor: pointer; text-align: left; font-weight: 600; margin-top: 5px; }
+        .modal-footer { border-top: 1px solid var(--cor-borda); padding-top: 15px; }
+        .total-container { display: flex; justify-content: space-between; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px; }
+        .btn-whatsapp { background: var(--cor-whatsapp); color: white; text-align: center; padding: 15px; border-radius: 8px; text-decoration: none; font-weight: 700; display: block; width: 100%; }
+        
+        .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #333; color: white; padding: 10px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; z-index: 1000; transition: transform 0.3s ease; }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ================= Responsividade (Tablets e Desktop) ================= */
+        @media (min-width: 768px) {
+            .produtos-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
+            
+            .topbar-beneficios { display: flex; }
+            .beneficios-mobile { display: none; }
+            .menu-toggle { display: none; }
+            
+            .categorias-menu {
+                position: static; opacity: 1; visibility: visible; transform: none;
+                flex-direction: row; box-shadow: none; padding: 10px 20px;
+                gap: 10px; overflow-x: auto; border-top: 1px solid var(--cor-borda);
+            }
+            .categoria-btn { border: 1px solid var(--cor-borda); border-radius: 20px; padding: 8px 16px; font-size: 0.85rem; background: var(--cor-fundo); border-left: 1px solid var(--cor-borda); }
+            .categoria-btn.ativo { background: var(--cor-primaria); color: var(--cor-secundaria); border-color: var(--cor-primaria); }
+            
+            .modal-content { border-radius: 12px; transform: scale(0.9); margin-bottom: 5vh; }
+            .modal-overlay { align-items: center; }
+            .modal-overlay.ativo .modal-content { transform: scale(1); }
+            .cart-flutuante { left: auto; right: 30px; transform: none; width: auto; gap: 20px; }
+            .cart-flutuante.hidden { transform: translateY(100px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Topbar de Benefícios (Apenas Desktop) -->
+    <div class="topbar-beneficios">
+        <div class="beneficio-item">🚚 Entrega rápida na região</div>
+        <div class="beneficio-item">💳 Parcelamento via Link/Maquininha</div>
+        <div class="beneficio-item">🔄 Primeira troca grátis</div>
+        <div class="beneficio-item">✨ Atendimento Personalizado</div>
+    </div>
+
+    <!-- Header com Toggle Integrado -->
+    <header>
+        <div class="header-main">
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Abrir Menu">☰</button>
+            <div class="logo">Boutique <span>Elegance</span></div>
+            <div style="font-size: 1.2rem; cursor: pointer;" onclick="abrirModal()">🛍️</div>
+        </div>
+        
+        <nav id="menu-categorias" class="categorias-menu">
+            <!-- Benefícios (Apenas Mobile - Dentro do Menu) -->
+            <div class="beneficios-mobile">
+                <div class="beneficio-item">🚚 Entrega rápida na região</div>
+                <div class="beneficio-item">💳 Parcelamento via Link/Maqui.</div>
+                <div class="beneficio-item">🔄 Primeira troca grátis</div>
+                <div class="beneficio-item">✨ Atendimento VIP</div>
+            </div>
+
+            <a href="#destaques" class="categoria-btn ativo">Destaques</a>
+            <a href="#blusas" class="categoria-btn">Blusas e Camisas</a>
+            <a href="#calcas" class="categoria-btn">Calças</a>
+            <a href="#vestidos" class="categoria-btn">Vestidos</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        
+        <!-- SESSÃO 1: DESTAQUES (4 Produtos) -->
+        <section id="destaques" class="sessao-catalogo">
+            <h2 class="section-titulo">Mais Desejados</h2>
+            <div class="produtos-grid">
+                <article class="produto-card">
+                    <span class="badge-novo">NOVO</span>
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1551028719-012132b929b4?auto=format&fit=crop&w=400&q=80" alt="Jaqueta" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Jaqueta de Couro Ecológico Premium</h3><p class="produto-preco">R$ 289,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(1, 'Jaqueta Couro Premium', 289.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1591369822096-ffd140ec94a4?auto=format&fit=crop&w=400&q=80" alt="Conjunto Alfaiataria" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Conjunto Alfaiataria Areia</h3><p class="produto-preco">R$ 199,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(2, 'Conjunto Alfaiataria', 199.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1548624313-0396c75e4b1a?auto=format&fit=crop&w=400&q=80" alt="Blazer Feminino" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Blazer Alongado Clássico Preto</h3><p class="produto-preco">R$ 179,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(3, 'Blazer Alongado', 179.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1485231183945-fd66ce4b896a?auto=format&fit=crop&w=400&q=80" alt="Macacão Longo" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Macacão Pantalona Decote V</h3><p class="produto-preco">R$ 229,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(4, 'Macacão Pantalona', 229.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SESSÃO 2: BLUSAS E CAMISAS (4 Produtos) -->
+        <section id="blusas" class="sessao-catalogo">
+            <h2 class="section-titulo">Blusas e Camisas</h2>
+            <div class="produtos-grid">
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=400&q=80" alt="T-shirt" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">T-shirt Básica Algodão Egípcio</h3><p class="produto-preco">R$ 69,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(5, 'T-shirt Algodão', 69.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=400&q=80" alt="Camisa Linho" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Camisa de Linho Manga Longa Branca</h3><p class="produto-preco">R$ 139,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(6, 'Camisa de Linho', 139.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=400&q=80" alt="Cropped Tricot" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Cropped em Tricot Modal Gola Alta</h3><p class="produto-preco">R$ 89,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(7, 'Cropped Tricot', 89.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1564257631407-4d9f783269f8?auto=format&fit=crop&w=400&q=80" alt="Blusa Ciganinha" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Blusa Ciganinha Estampada Floral</h3><p class="produto-preco">R$ 79,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(8, 'Blusa Ciganinha Floral', 79.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SESSÃO 3: CALÇAS (4 Produtos) -->
+        <section id="calcas" class="sessao-catalogo">
+            <h2 class="section-titulo">Calças</h2>
+            <div class="produtos-grid">
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1542272604-780c82faa2e1?auto=format&fit=crop&w=400&q=80" alt="Calça Jeans Skinny" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Calça Jeans Skinny Lavagem Clara</h3><p class="produto-preco">R$ 159,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(9, 'Calça Jeans Skinny', 159.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=400&q=80" alt="Calça Pantalona" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Calça Pantalona Viscolinho Preta</h3><p class="produto-preco">R$ 129,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(10, 'Calça Pantalona', 129.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1584323803806-7b041fea92f4?auto=format&fit=crop&w=400&q=80" alt="Calça Alfaiataria" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Calça de Alfaiataria Reta Chumbo</h3><p class="produto-preco">R$ 149,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(11, 'Calça Alfaiataria', 149.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=400&q=80" alt="Short Jeans" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Short Jeans Destroyed Cintura Alta</h3><p class="produto-preco">R$ 89,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(12, 'Short Jeans', 89.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- SESSÃO 4: VESTIDOS (4 Produtos) -->
+        <section id="vestidos" class="sessao-catalogo">
+            <h2 class="section-titulo">Vestidos</h2>
+            <div class="produtos-grid">
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=400&q=80" alt="Vestido Longo" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Vestido Longo Estampa Floral</h3><p class="produto-preco">R$ 189,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(13, 'Vestido Longo Floral', 189.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=400&q=80" alt="Vestido Midi Canelado" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Vestido Midi Canelado Manga Longa</h3><p class="produto-preco">R$ 99,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(14, 'Vestido Midi Canelado', 99.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=400&q=80" alt="Vestido Festa" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Vestido Longo de Festa com Fenda</h3><p class="produto-preco">R$ 259,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(15, 'Vestido de Festa', 259.90)">Adicionar</button>
+                    </div>
+                </article>
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?auto=format&fit=crop&w=400&q=80" alt="Vestido Curto" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div><h3 class="produto-titulo">Vestido Curto Soltinho Terracota</h3><p class="produto-preco">R$ 119,90</p></div>
+                        <button class="btn-add" onclick="addCarrinho(16, 'Vestido Curto Terracota', 119.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>Sobre a Loja</h3>
+                <p>A Boutique Elegance traz as últimas tendências da moda com foco em qualidade, conforto e um atendimento exclusivo.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li>📞 (21) 99999-9999</li>
+                    <li>Seg à Sex: 09h às 18h</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Onde Estamos</h3>
+                <p>Rua Coronel Agostinho, 123</p>
+                <p>Campo Grande, Rio de Janeiro - RJ</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Boutique Elegance. Todos os direitos reservados.<br>
+            Desenvolvido por <strong>Sua Agência Local</strong>
+        </div>
+    </footer>
+
+    <!-- Elementos Flutuantes -->
+    <div id="btn-flutuante" class="cart-flutuante hidden" onclick="abrirModal()">
+        <span>Ver Sacola</span>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span id="valor-previa">R$ 0,00</span>
+            <div class="cart-badge" id="badge-previa">0</div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-carrinho" onclick="fecharModalFora(event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sua Sacola</h2>
+                <button class="fechar-modal" onclick="fecharModal()">&times;</button>
+            </div>
+            <div class="itens-carrinho" id="lista-carrinho"></div>
+            <div class="modal-footer">
+                <div class="total-container"><span>Total:</span><span id="valor-total">R$ 0,00</span></div>
+                <button class="btn-whatsapp" onclick="enviarWhatsApp()">Enviar Pedido p/ WhatsApp</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Produto adicionado à sacola!</div>
+
+    <script>
+        // Lógica do Menu Hamburger
+        function toggleMenu() {
+            document.getElementById('menu-categorias').classList.toggle('aberto');
+        }
+
+        document.querySelectorAll('.categoria-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.categoria-btn').forEach(b => b.classList.remove('ativo'));
+                this.classList.add('ativo');
+                document.getElementById('menu-categorias').classList.remove('aberto');
+            });
+        });
+
+        // Lógica do Carrinho
+        const telefoneLoja = "5521999999999"; 
+        let carrinho = [];
+
+        function addCarrinho(id, nome, preco) {
+            carrinho.push({ id, nome, preco });
+            atualizarInterface();
+            mostrarToast();
+        }
+
+        function removerItem(index) {
+            carrinho.splice(index, 1);
+            atualizarInterface();
+            if(carrinho.length === 0) fecharModal();
+        }
+
+        function atualizarInterface() {
+            const btnFlutuante = document.getElementById('btn-flutuante');
+            const lista = document.getElementById('lista-carrinho');
+            let total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            let totalF = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+            if (carrinho.length > 0) {
+                btnFlutuante.classList.remove('hidden');
+                document.getElementById('badge-previa').textContent = carrinho.length;
+                document.getElementById('valor-previa').textContent = totalF;
+            } else {
+                btnFlutuante.classList.add('hidden');
+            }
+
+            document.getElementById('valor-total').textContent = totalF;
+            lista.innerHTML = '';
+            carrinho.forEach((item, index) => {
+                lista.innerHTML += `
+                    <div class="item-carrinho">
+                        <div class="item-detalhes">
+                            <span class="item-nome">${item.nome}</span>
+                            <span class="item-preco">${item.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</span>
+                            <button class="btn-remover" onclick="removerItem(${index})">Remover</button>
+                        </div>
+                        <div style="font-weight: 600;">1x</div>
+                    </div>`;
+            });
+        }
+
+        function enviarWhatsApp() {
+            if(carrinho.length === 0) return;
+            let texto = "Olá! Gostaria de finalizar o seguinte pedido:%0A%0A";
+            carrinho.forEach(item => { texto += `▪️ ${item.nome} - ${item.preco.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}%0A`; });
+            let total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+            texto += `%0A*Valor Total: ${total.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}*`;
+            texto += "%0A%0AAguardo confirmação para pagamento via Pix/Cartão.";
+            window.open(`https://wa.me/${telefoneLoja}?text=${texto}`, '_blank');
+        }
+
+        function abrirModal() { document.getElementById('modal-carrinho').classList.add('ativo'); document.body.style.overflow = 'hidden'; }
+        function fecharModal() { document.getElementById('modal-carrinho').classList.remove('ativo'); document.body.style.overflow = 'auto'; }
+        function fecharModalFora(event) { if(event.target.id === 'modal-carrinho') fecharModal(); }
+
+        function mostrarToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+    </script>
+</body>
+</html>
