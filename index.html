@@ -91,8 +91,21 @@
         .toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #333; color: white; padding: 10px 20px; border-radius: 30px; font-size: 0.85rem; font-weight: 600; z-index: 1000; transition: transform 0.3s ease; }
         .toast.show { transform: translateX(-50%) translateY(0); }
 
+        /* ================= Footer Estilizado (CORRIGIDO) ================= */
+        footer { background-color: var(--cor-footer); color: #fff; padding: 40px 20px 20px; margin-top: 20px; font-size: 0.9rem; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .footer-col h3 { color: var(--cor-destaque); font-size: 1.1rem; margin-bottom: 15px; text-transform: uppercase; }
+        .footer-col p, .footer-col li { color: #cccccc; margin-bottom: 10px; line-height: 1.5; }
+        .footer-col ul { list-style: none; }
+        .footer-col a { color: #cccccc; text-decoration: none; transition: color 0.2s; }
+        .footer-col a:hover { color: var(--cor-destaque); }
+        .redes-sociais { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icon { width: 35px; height: 35px; background: #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; text-decoration: none; font-size: 1.2rem; }
+        .footer-bottom { text-align: center; border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; color: #888; font-size: 0.85rem; padding-bottom: 20px; }
+
         @media (min-width: 768px) {
             .produtos-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+            .footer-grid { grid-template-columns: repeat(4, 1fr); }
             .topbar-beneficios { display: flex; } .beneficios-mobile, .menu-toggle { display: none; }
             .categorias-menu { position: static; opacity: 1; visibility: visible; transform: none; flex-direction: row; box-shadow: none; padding: 10px 20px; gap: 10px; border-top: 1px solid var(--cor-borda); }
             .categoria-btn { border: 1px solid var(--cor-borda); border-radius: 20px; padding: 8px 16px; background: var(--cor-fundo); border-left: 1px solid var(--cor-borda); }
@@ -139,7 +152,6 @@
             <h2 class="section-titulo">Mais Desejados</h2>
             <div class="produtos-grid">
                 
-                <!-- Produto 1 -->
                 <article class="produto-card">
                     <span class="badge-escassez">🔥 Restam 2</span>
                     <div class="produto-img-container"><img src="https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Jaqueta" class="produto-img"></div>
@@ -156,7 +168,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 2 -->
                 <article class="produto-card">
                     <span class="badge-novo">NOVO</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=80&w=500&auto=format&fit=crop" alt="Conjunto" class="produto-img"></div>
@@ -173,7 +184,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 3 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1548624313-0396c75e4b1a?q=80&w=500&auto=format&fit=crop" alt="Blazer Feminino" class="produto-img"></div>
                     <div class="produto-info">
@@ -189,7 +199,6 @@
                     </div>
                 </article>
                 
-                 <!-- Produto 4 -->
                 <article class="produto-card">
                     <span class="badge-escassez">🔥 Última Peça</span>
                     <div class="produto-img-container"><img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Macacão Longo" class="produto-img"></div>
@@ -213,7 +222,6 @@
             <h2 class="section-titulo">Blusas e Camisas</h2>
             <div class="produtos-grid">
                 
-                <!-- Produto 5 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop" alt="T-shirt" class="produto-img"></div>
                     <div class="produto-info">
@@ -229,7 +237,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 6 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1604695573706-53170668f6a6?q=80&w=500&auto=format&fit=crop" alt="Camisa Linho" class="produto-img"></div>
                     <div class="produto-info">
@@ -245,7 +252,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 7 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?q=80&w=500&auto=format&fit=crop" alt="Cropped" class="produto-img"></div>
                     <div class="produto-info">
@@ -261,7 +267,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 8 -->
                 <article class="produto-card">
                     <span class="badge-escassez">🔥 Restam 3</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500&auto=format&fit=crop" alt="Ciganinha" class="produto-img"></div>
@@ -285,7 +290,6 @@
             <h2 class="section-titulo">Calças</h2>
             <div class="produtos-grid">
                 
-                <!-- Produto 9 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=500&auto=format&fit=crop" alt="Calça Jeans" class="produto-img"></div>
                     <div class="produto-info">
@@ -301,7 +305,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 10 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=500&auto=format&fit=crop" alt="Calça Pantalona" class="produto-img"></div>
                     <div class="produto-info">
@@ -317,7 +320,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 11 -->
                 <article class="produto-card">
                     <span class="badge-novo">NOVO</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1584323803806-7b041fea92f4?q=80&w=500&auto=format&fit=crop" alt="Calça Alfaiataria" class="produto-img"></div>
@@ -334,7 +336,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 12 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=500&auto=format&fit=crop" alt="Short Jeans" class="produto-img"></div>
                     <div class="produto-info">
@@ -357,7 +358,6 @@
             <h2 class="section-titulo">Vestidos</h2>
             <div class="produtos-grid">
                 
-                <!-- Produto 13 -->
                 <article class="produto-card">
                     <span class="badge-escassez">🔥 Restam 2</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=500&auto=format&fit=crop" alt="Vestido Longo" class="produto-img"></div>
@@ -374,7 +374,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 14 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=500&auto=format&fit=crop" alt="Vestido Midi" class="produto-img"></div>
                     <div class="produto-info">
@@ -390,7 +389,6 @@
                     </div>
                 </article>
 
-                <!-- Produto 15 -->
                 <article class="produto-card">
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=500&auto=format&fit=crop" alt="Vestido Festa" class="produto-img"></div>
                     <div class="produto-info">
@@ -406,7 +404,6 @@
                     </div>
                 </article>
                 
-                 <!-- Produto 16 -->
                 <article class="produto-card">
                     <span class="badge-novo">NOVO</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?q=80&w=500&auto=format&fit=crop" alt="Vestido Curto" class="produto-img"></div>
@@ -479,14 +476,35 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ================= FOOTER ================= -->
     <footer>
         <div class="footer-grid">
-            <div class="footer-col"><h3>Sobre a Loja</h3><p>Boutique Elegance. Qualidade, conforto e atendimento exclusivo.</p></div>
-            <div class="footer-col"><h3>Atendimento</h3><ul><li>📞 (21) 99999-9999</li><li>Seg à Sex: 09h às 18h</li></ul></div>
-            <div class="footer-col"><h3>Onde Estamos</h3><p>Rua Cel. Agostinho, 123</p><p>Campo Grande, RJ</p></div>
+            <div class="footer-col">
+                <h3>Sobre a Loja</h3>
+                <p>A Boutique Elegance traz as últimas tendências da moda com foco em qualidade, conforto e um atendimento exclusivo para você.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Atendimento</h3>
+                <ul>
+                    <li>📞 (21) 99999-9999</li>
+                    <li>Seg à Sex: 09h às 18h</li>
+                    <li>Sábados: 09h às 14h</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Onde Estamos</h3>
+                <p>Rua Cel. Agostinho, 123</p>
+                <p>Campo Grande, Rio de Janeiro - RJ</p>
+                <div class="redes-sociais">
+                    <a href="#" class="social-icon">📸</a>
+                    <a href="#" class="social-icon">📘</a>
+                </div>
+            </div>
         </div>
-        <div class="footer-bottom">Desenvolvido por <strong>Sua Agência Local</strong></div>
+        <div class="footer-bottom">
+            &copy; 2026 Boutique Elegance. Todos os direitos reservados.<br>
+            Desenvolvido por <strong>Leone DiCamp</strong>
+        </div>
     </footer>
 
     <div id="toast" class="toast">Produto adicionado à sacola!</div>
