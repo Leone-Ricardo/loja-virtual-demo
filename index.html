@@ -35,11 +35,11 @@
         
         /* Badges e Imagens */
         .badge-novo { position: absolute; top: 10px; left: 10px; background: var(--cor-destaque); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; }
-        .badge-escassez { position: absolute; top: 10px; right: 10px; background: var(--cor-alerta); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; display: flex; align-items: center; gap: 4px; }
+        .badge-escassez { position: absolute; top: 10px; right: 10px; background: var(--cor-alerta); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; z-index: 2; }
         .produto-img-container { position: relative; padding-top: 130%; overflow: hidden; background: #eee; }
         .produto-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
         
-        /* Infos do Produto (Tamanho e Cor) */
+        /* Infos do Produto */
         .produto-info { padding: 12px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .produto-titulo { font-size: 0.9rem; color: var(--cor-texto-mutado); font-weight: 400; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .produto-preco { font-size: 1.1rem; font-weight: 700; color: var(--cor-primaria); margin-bottom: 10px; }
@@ -47,7 +47,7 @@
         .seletor { width: 50%; padding: 8px 4px; border: 1px solid var(--cor-borda); border-radius: 6px; font-size: 0.8rem; color: var(--cor-texto-mutado); outline: none; background-color: var(--cor-fundo); }
         .btn-add { background-color: var(--cor-primaria); color: var(--cor-secundaria); border: none; padding: 10px; border-radius: 6px; font-weight: 600; font-size: 0.85rem; cursor: pointer; width: 100%; }
 
-        /* Botões Flutuantes (Carrinho e Suporte) */
+        /* Botões Flutuantes */
         .cart-flutuante { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background-color: var(--cor-primaria); color: var(--cor-secundaria); padding: 14px 24px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: space-between; width: 85%; max-width: 350px; font-weight: 600; cursor: pointer; z-index: 90; transition: transform 0.3s, opacity 0.3s; }
         .cart-flutuante.hidden { transform: translate(-50%, 100px); opacity: 0; pointer-events: none; }
         .cart-badge { background: var(--cor-secundaria); color: var(--cor-primaria); border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
@@ -106,12 +106,14 @@
 </head>
 <body>
 
+    <!-- Faixa Topo Desktop -->
     <div class="topbar-beneficios">
         <div class="beneficio-item">🚚 Entrega rápida na região</div>
         <div class="beneficio-item">💳 Parcelamento via Maquininha</div>
         <div class="beneficio-item">🔄 Primeira troca grátis</div>
     </div>
 
+    <!-- Header -->
     <header>
         <div class="header-main">
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
@@ -126,16 +128,18 @@
             <a href="#destaques" class="categoria-btn ativo">Destaques</a>
             <a href="#blusas" class="categoria-btn">Blusas</a>
             <a href="#calcas" class="categoria-btn">Calças</a>
+            <a href="#vestidos" class="categoria-btn">Vestidos</a>
         </nav>
     </header>
 
     <main class="container">
-        <!-- Destaques -->
+        
+        <!-- ================= SESSÃO 1: DESTAQUES ================= -->
         <section id="destaques" class="sessao-catalogo">
             <h2 class="section-titulo">Mais Desejados</h2>
             <div class="produtos-grid">
                 
-                <!-- Produto 1 (Com Escassez e Cor) -->
+                <!-- Produto 1 -->
                 <article class="produto-card">
                     <span class="badge-escassez">🔥 Restam 2</span>
                     <div class="produto-img-container"><img src="https://images.pexels.com/photos/1124465/pexels-photo-1124465.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Jaqueta" class="produto-img"></div>
@@ -169,36 +173,253 @@
                     </div>
                 </article>
 
-                <!-- Produto 3 (Com Escassez) -->
+                <!-- Produto 3 -->
                 <article class="produto-card">
-                    <span class="badge-escassez">🔥 Última Peça</span>
-                    <div class="produto-img-container"><img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Macacão" class="produto-img"></div>
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1548624313-0396c75e4b1a?q=80&w=500&auto=format&fit=crop" alt="Blazer Feminino" class="produto-img"></div>
                     <div class="produto-info">
                         <div>
-                            <h3 class="produto-titulo">Macacão Pantalona</h3>
-                            <p class="produto-preco">R$ 229,90</p>
+                            <h3 class="produto-titulo">Blazer Alongado Clássico</h3>
+                            <p class="produto-preco">R$ 179,90</p>
                             <div class="seletores-container">
-                                <select id="tam-3" class="seletor"><option value="M">M</option></select>
-                                <select id="cor-3" class="seletor"><option value="Terracota">Terracota</option></select>
+                                <select id="tam-3" class="seletor"><option value="M">M</option><option value="G">G</option></select>
+                                <select id="cor-3" class="seletor"><option value="Preto">Preto</option></select>
                             </div>
                         </div>
-                        <button class="btn-add" onclick="addCarrinho(3, 'Macacão Pantalona', 229.90)">Adicionar</button>
+                        <button class="btn-add" onclick="addCarrinho(3, 'Blazer Alongado', 179.90)">Adicionar</button>
                     </div>
                 </article>
                 
                  <!-- Produto 4 -->
                 <article class="produto-card">
+                    <span class="badge-escassez">🔥 Última Peça</span>
+                    <div class="produto-img-container"><img src="https://images.pexels.com/photos/794064/pexels-photo-794064.jpeg?auto=compress&cs=tinysrgb&w=500" alt="Macacão Longo" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Macacão Pantalona V</h3>
+                            <p class="produto-preco">R$ 229,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-4" class="seletor"><option value="P">P</option><option value="M" selected>M</option></select>
+                                <select id="cor-4" class="seletor"><option value="Mostarda">Mostarda</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(4, 'Macacão Pantalona', 229.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= SESSÃO 2: BLUSAS ================= -->
+        <section id="blusas" class="sessao-catalogo">
+            <h2 class="section-titulo">Blusas e Camisas</h2>
+            <div class="produtos-grid">
+                
+                <!-- Produto 5 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=500&auto=format&fit=crop" alt="T-shirt" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">T-shirt Básica Algodão</h3>
+                            <p class="produto-preco">R$ 69,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-5" class="seletor"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                <select id="cor-5" class="seletor"><option value="Preta">Preta</option><option value="Branca">Branca</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(5, 'T-shirt Básica', 69.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 6 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1604695573706-53170668f6a6?q=80&w=500&auto=format&fit=crop" alt="Camisa Linho" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Camisa de Linho Manga Longa</h3>
+                            <p class="produto-preco">R$ 139,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-6" class="seletor"><option value="P">P</option><option value="M">M</option></select>
+                                <select id="cor-6" class="seletor"><option value="Branca">Branca</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(6, 'Camisa de Linho', 139.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 7 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1618244972963-dbee1a7edc95?q=80&w=500&auto=format&fit=crop" alt="Cropped" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Cropped em Tricot Modal</h3>
+                            <p class="produto-preco">R$ 89,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-7" class="seletor"><option value="Único">Único</option></select>
+                                <select id="cor-7" class="seletor"><option value="Nude">Nude</option><option value="Preto">Preto</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(7, 'Cropped Tricot', 89.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 8 -->
+                <article class="produto-card">
+                    <span class="badge-escassez">🔥 Restam 3</span>
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=500&auto=format&fit=crop" alt="Ciganinha" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Blusa Ciganinha Floral</h3>
+                            <p class="produto-preco">R$ 79,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-8" class="seletor"><option value="M" selected>M</option><option value="G">G</option></select>
+                                <select id="cor-8" class="seletor"><option value="Azul">Azul</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(8, 'Blusa Ciganinha', 79.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= SESSÃO 3: CALÇAS ================= -->
+        <section id="calcas" class="sessao-catalogo">
+            <h2 class="section-titulo">Calças</h2>
+            <div class="produtos-grid">
+                
+                <!-- Produto 9 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=500&auto=format&fit=crop" alt="Calça Jeans" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Calça Jeans Skinny</h3>
+                            <p class="produto-preco">R$ 159,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-9" class="seletor"><option value="36">36</option><option value="38" selected>38</option><option value="40">40</option><option value="42">42</option></select>
+                                <select id="cor-9" class="seletor"><option value="Jeans Claro">Jeans Claro</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(9, 'Calça Jeans Skinny', 159.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 10 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=500&auto=format&fit=crop" alt="Calça Pantalona" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Calça Pantalona Viscolinho</h3>
+                            <p class="produto-preco">R$ 129,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-10" class="seletor"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
+                                <select id="cor-10" class="seletor"><option value="Preta">Preta</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(10, 'Calça Pantalona', 129.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 11 -->
+                <article class="produto-card">
+                    <span class="badge-novo">NOVO</span>
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1584323803806-7b041fea92f4?q=80&w=500&auto=format&fit=crop" alt="Calça Alfaiataria" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Calça de Alfaiataria Reta</h3>
+                            <p class="produto-preco">R$ 149,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-11" class="seletor"><option value="38">38</option><option value="40" selected>40</option><option value="42">42</option></select>
+                                <select id="cor-11" class="seletor"><option value="Chumbo">Chumbo</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(11, 'Calça Alfaiataria', 149.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 12 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1591195853828-11db59a44f6b?q=80&w=500&auto=format&fit=crop" alt="Short Jeans" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Short Jeans Cintura Alta</h3>
+                            <p class="produto-preco">R$ 89,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-12" class="seletor"><option value="36">36</option><option value="38" selected>38</option><option value="40">40</option></select>
+                                <select id="cor-12" class="seletor"><option value="Jeans Escuro">Jeans Escuro</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(12, 'Short Jeans', 89.90)">Adicionar</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ================= SESSÃO 4: VESTIDOS ================= -->
+        <section id="vestidos" class="sessao-catalogo">
+            <h2 class="section-titulo">Vestidos</h2>
+            <div class="produtos-grid">
+                
+                <!-- Produto 13 -->
+                <article class="produto-card">
+                    <span class="badge-escassez">🔥 Restam 2</span>
                     <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=500&auto=format&fit=crop" alt="Vestido Longo" class="produto-img"></div>
                     <div class="produto-info">
                         <div>
                             <h3 class="produto-titulo">Vestido Longo Floral</h3>
                             <p class="produto-preco">R$ 189,90</p>
                             <div class="seletores-container">
-                                <select id="tam-4" class="seletor"><option value="P">P</option><option value="M" selected>M</option><option value="G">G</option></select>
-                                <select id="cor-4" class="seletor"><option value="Floral Azul">Floral Azul</option><option value="Floral Rosa">Floral Rosa</option></select>
+                                <select id="tam-13" class="seletor"><option value="P">P</option><option value="M" selected>M</option></select>
+                                <select id="cor-13" class="seletor"><option value="Floral Azul">Floral Azul</option></select>
                             </div>
                         </div>
-                        <button class="btn-add" onclick="addCarrinho(4, 'Vestido Floral', 189.90)">Adicionar</button>
+                        <button class="btn-add" onclick="addCarrinho(13, 'Vestido Floral', 189.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 14 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?q=80&w=500&auto=format&fit=crop" alt="Vestido Midi" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Vestido Midi Canelado</h3>
+                            <p class="produto-preco">R$ 99,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-14" class="seletor"><option value="P">P</option><option value="M">M</option><option value="G">G</option></select>
+                                <select id="cor-14" class="seletor"><option value="Preto">Preto</option><option value="Bordô">Bordô</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(14, 'Vestido Midi', 99.90)">Adicionar</button>
+                    </div>
+                </article>
+
+                <!-- Produto 15 -->
+                <article class="produto-card">
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=500&auto=format&fit=crop" alt="Vestido Festa" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Vestido Longo de Festa Fenda</h3>
+                            <p class="produto-preco">R$ 259,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-15" class="seletor"><option value="38">38</option><option value="40">40</option></select>
+                                <select id="cor-15" class="seletor"><option value="Rosê">Rosê</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(15, 'Vestido de Festa', 259.90)">Adicionar</button>
+                    </div>
+                </article>
+                
+                 <!-- Produto 16 -->
+                <article class="produto-card">
+                    <span class="badge-novo">NOVO</span>
+                    <div class="produto-img-container"><img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?q=80&w=500&auto=format&fit=crop" alt="Vestido Curto" class="produto-img"></div>
+                    <div class="produto-info">
+                        <div>
+                            <h3 class="produto-titulo">Vestido Curto Soltinho</h3>
+                            <p class="produto-preco">R$ 119,90</p>
+                            <div class="seletores-container">
+                                <select id="tam-16" class="seletor"><option value="P">P</option><option value="M" selected>M</option></select>
+                                <select id="cor-16" class="seletor"><option value="Terracota">Terracota</option></select>
+                            </div>
+                        </div>
+                        <button class="btn-add" onclick="addCarrinho(16, 'Vestido Curto', 119.90)">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -220,7 +441,7 @@
         </div>
     </div>
 
-    <!-- MODAL DO CARRINHO COM CUPOM -->
+    <!-- MODAL DO CARRINHO COM CUPOM E FRETE -->
     <div class="modal-overlay" id="modal-carrinho" onclick="fecharModalFora(event)">
         <div class="modal-content">
             <div class="modal-header">
@@ -257,6 +478,16 @@
             </div>
         </div>
     </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col"><h3>Sobre a Loja</h3><p>Boutique Elegance. Qualidade, conforto e atendimento exclusivo.</p></div>
+            <div class="footer-col"><h3>Atendimento</h3><ul><li>📞 (21) 99999-9999</li><li>Seg à Sex: 09h às 18h</li></ul></div>
+            <div class="footer-col"><h3>Onde Estamos</h3><p>Rua Cel. Agostinho, 123</p><p>Campo Grande, RJ</p></div>
+        </div>
+        <div class="footer-bottom">Desenvolvido por <strong>Sua Agência Local</strong></div>
+    </footer>
 
     <div id="toast" class="toast">Produto adicionado à sacola!</div>
 
@@ -300,7 +531,7 @@
             }
         }
 
-        // Sistema de Cupom Fictício mas funcional (Desconto de 10%)
+        // Sistema de Cupom Fictício (Desconto de 10%)
         function aplicarCupom() {
             const codigo = document.getElementById('input-cupom').value.toUpperCase().trim();
             if(codigo === "BEMVINDO10" || codigo === "MARIA10") {
